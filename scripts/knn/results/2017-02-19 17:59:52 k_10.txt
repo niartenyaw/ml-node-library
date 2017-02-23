@@ -1,21 +1,22 @@
-KNN Results
+Results
 
-Data source: /cifar-10-batches-py/
-k: 10
-datetime:  2017-02-19 17:59:52.536497
-Number of images included: 1000
-
+Method:knn
+Data source:/cifar-10-batches-py/
+datetime:2017-02-19 17:59:52.536497
+Number of images included:1000
 
 Overall accuracy: 0.312
 
 Accuracy by class:
-airplane : 0.52427184466
-automobile : 0.134831460674
-bird : 0.46
-cat : 0.184466019417
-deer : 0.411111111111
-dog : 0.093023255814
-frog : 0.214285714286
-horse : 0.166666666667
-ship : 0.688679245283
-truck : 0.201834862385
+airplane:0.52427184466
+automobile:0.134831460674
+bird:0.46
+cat:0.184466019417
+deer:0.411111111111
+dog:0.093023255814
+frog:0.214285714286
+horse:0.166666666667
+ship:0.688679245283
+truck:0.201834862385
+
+k:10

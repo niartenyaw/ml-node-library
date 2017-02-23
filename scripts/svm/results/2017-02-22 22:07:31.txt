@@ -1,0 +1,5 @@
+Results
+
+Method:svm
+Data source:/cifar-10-batches-py/
+datetime:2017-02-22 22:07:31.739188

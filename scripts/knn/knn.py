@@ -66,25 +66,6 @@ def concat_datasets(filename, X_data=np.array([]), Y_data=np.array([])):
 	else:
 		return np.concatenate((X_data, np.array(batch['data']).astype(int)), axis = 0), np.concatenate((Y_data, np.array(batch['labels']).astype(int)), axis = 0)
 
-def print_results_file(results, pc, k):
-	dt = str(datetime.now())
-	filename = './results/' + dt[:-7] + ' k_' + str(k) + '.txt'
-	outfile = open(filename, 'w')
-	outfile.write('KNN Results\n')
-	outfile.write('\n')
-	outfile.write('Data source: ' + DATA_SOURCE + '\n')
-	outfile.write('k: ' + str(k) + '\n')
-	outfile.write('datetime:  ' + dt + '\n')
-	outfile.write('Number of images included: ' + str(NUM_TO_COMPLETE) + '\n')
-	outfile.write('\n')
-	outfile.write('\n')
-	outfile.write('Overall accuracy: ' + str(pc) + '\n')
-	outfile.write('\n')
-	outfile.write('Accuracy by class:\n')
-	for i in range(len(CLASS_NAMES)):
-		outfile.write(CLASS_NAMES[i] + ' : ' + str(results[i]) + '\n')
-	outfile.close()
-
 if __name__== "__main__":
 	
 	#fake_results = [0,1,2,3,4,5,6,7,8,9]
@@ -100,7 +81,7 @@ if __name__== "__main__":
 	for k in range(10,11):
 		print "Working on:", k
 		results, pc = knn(X_train, Y_train, X_test, Y_test, k)
-		print_results_file(results, pc, k)
+		print_results_file(results, pc, k, method, DATA_SOURCE)
 		
 
 		

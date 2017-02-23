@@ -1,0 +1,27 @@
+Results
+
+Method:svm
+Data source:/cifar-10-batches-py/
+datetime:2017-02-22 22:08:33.616028
+Number of images included:100
+
+
+Overall accuracy:0.21
+
+Accuracy by class:
+airplane:0.0
+automobile:0.222222222222
+bird:0.5
+cat:0.444444444444
+deer:0.416666666667
+dog:0.0
+frog:0.0625
+horse:0.0833333333333
+ship:0.153846153846
+truck:0.375
+
+params:LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
+     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+     multi_class='ovr', penalty='l2', random_state=None, tol=0.0001,
+     verbose=0)
+svm_type:linear
