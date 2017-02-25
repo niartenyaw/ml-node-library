@@ -1,3 +1,0 @@
-KNN Results
-
-Data source: /cifar-10-batches-py/

@@ -1,5 +1,6 @@
 import numpy as np
 from datetime import datetime
+import os
 '''
 Format Pickle data into dictionary.
 
@@ -19,8 +20,9 @@ def unpickle(file):
 
 '''
 def print_results_file(info):
-	dt = str(datetime.now())
-	filename = 'results/' + dt[:-7] + '.txt'
+	print os.getcwd()
+	dt = str(datetime.now()).replace(':','-')
+	filename = './../../data' + info['data_source'] + 'results/' + info['method'] + ' ' + str(info['num_images']) + ' ' + dt[:-7] + '.txt'
 	outfile = open(filename, 'w')
 	outfile.write('Results\n')
 	outfile.write('\n')
@@ -28,6 +30,9 @@ def print_results_file(info):
 	outfile.write('Data source:' + info['data_source'] + '\n')
 	outfile.write('datetime:' + dt + '\n')
 	outfile.write('Number of images included:' + str(info['num_images']) + '\n')
+	outfile.write('Computer:' + str(info['computer']) + '\n')
+	outfile.write('Time:' + str(info['time']) + '\n')
+	outfile.write('\n')
 	outfile.write('\n')
 	outfile.write('Overall accuracy:' + str(info['pc_overall']) + '\n')
 	outfile.write('\n')
