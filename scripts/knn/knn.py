@@ -10,6 +10,8 @@ import matplotlib as plt
 import processing as pr
 from PIL import Image
 from datetime import datetime
+import time 
+import platform
 
 NUM_TO_COMPLETE = 1000 # 1 to 10,000 for one batch, 50,000 for all.
 NUM_COLORS = 3
@@ -23,7 +25,7 @@ CLASS_NAMES = pr.unpickle(FOLDER_PRE + DATA_SOURCE + 'batches.meta')['label_name
 def get_knn_classes(X_train,Y_train, X_test, k):
     results = np.empty(NUM_TO_COMPLETE)
     for i in range(NUM_TO_COMPLETE): #range(X_test.shape[0]):
-    	print "Image:", i
+    	print i,
         total_diffs = np.dot(abs(np.subtract(X_train, X_test[i])), 
         	np.ones(X_train.shape[1]))
         # Sort total_diffs and get the indices of the k smallest values
@@ -34,7 +36,7 @@ def get_knn_classes(X_train,Y_train, X_test, k):
 
 def knn(X_train, Y_train, X_test, Y_test, k):
 	results = get_knn_classes(X_train,Y_train, X_test, k).astype(int)
-	np.savetxt("./results/" + str(datetime.now())[:-7] + " k_" + str(k) + " knn array.csv", results, delimiter = ',', fmt = '%1d')
+	np.savetxt("./results/" + str(datetime.now())[:-7].translate(None,':') + " k_" + str(k) + " knn array.csv", results, delimiter = ',', fmt = '%1d')
 	test_diff = np.subtract(results,Y_test[:NUM_TO_COMPLETE])
 	num_incorrect = np.count_nonzero(test_diff)
 	test_diff[test_diff > 0] = 1
@@ -67,7 +69,7 @@ def concat_datasets(filename, X_data=np.array([]), Y_data=np.array([])):
 		return np.concatenate((X_data, np.array(batch['data']).astype(int)), axis = 0), np.concatenate((Y_data, np.array(batch['labels']).astype(int)), axis = 0)
 
 if __name__== "__main__":
-	
+	t0 = time.time()
 	#fake_results = [0,1,2,3,4,5,6,7,8,9]
 	#print_results_file(fake_results, 0.5, 10)
 
@@ -78,11 +80,20 @@ if __name__== "__main__":
 	X_test, Y_test = concat_datasets(FOLDER_PRE + DATA_SOURCE + 'test_batch')
 	
 	#produce_average_pixel_images(X_train, Y_train, CLASS_NAMES)
-	for k in range(10,11):
-		print "Working on:", k
+	for k in range(1,10):
+		print "\nWorking on k = ", k
 		results, pc = knn(X_train, Y_train, X_test, Y_test, k)
-		print_results_file(results, pc, k, method, DATA_SOURCE)
-		
-
-		
-
+		pr.print_results_file(dict(
+            pc_overall=pc,
+            pc_by_class=results,
+            class_names=CLASS_NAMES,
+            data_source=DATA_SOURCE,
+            num_images=NUM_TO_COMPLETE,
+            method='knn',
+            computer=platform.uname(),
+            time=time.time() - t0,
+            other=dict(
+                k=k,
+                ),
+        )
+    )

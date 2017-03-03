@@ -36,8 +36,7 @@ if __name__== "__main__":
     X_test = np.array(b_test['data'])[:NUM_TO_COMPLETE].astype(int)
     y_test = np.array(b_test['labels'])[:NUM_TO_COMPLETE].astype(int)
 
-    lin_clf = svm.LinearSVC()
-    lin_clf.fit(X_train, y_train)
+    lin_clf = svm.LinearSVC().fit(X_train, y_train)
 
     pred = lin_clf.predict(X_test)
 
@@ -47,12 +46,10 @@ if __name__== "__main__":
 
     # +1 to the classes on y_test (now 1 to 10) to differentiate it from 0 (a correct prediction)
     incorrect_by_class = np.bincount(incorrect * (y_test+1))[1:]
-    print incorrect_by_class
-    print np.bincount(y_test)
+    
     pc_by_class = 1 - incorrect_by_class.astype(float) / np.bincount(y_test).astype(float)
-    print pc_by_class
 
-    np.set_printoptions(threshold=np.nan)
+    #np.set_printoptions(threshold=np.nan)
     pr.print_results_file(dict(
             pc_overall=(1.0 - sum(incorrect).astype(float) / NUM_TO_COMPLETE),
             pc_by_class=pc_by_class,
@@ -69,4 +66,3 @@ if __name__== "__main__":
                 ),
         )
     )
-

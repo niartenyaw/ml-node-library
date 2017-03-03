@@ -1,0 +1,25 @@
+Results
+
+Method:knn
+Data source:/cifar-10-batches-py/
+datetime:2017-03-01 19-27-46
+Number of images included:20
+Computer:Windows DESKTOP-AEDARJ3 10 10.0.14393 AMD64 Intel64 Family 6 Model 60 Stepping 3 GenuineIntel
+Time:6.5640001297
+
+
+Overall accuracy:0.3
+
+Accuracy by class:
+airplane:0
+automobile:.
+bird:5
+cat:,
+deer:0
+dog:.
+frog:0
+horse:,
+ship:n
+truck:a
+
+k:10
